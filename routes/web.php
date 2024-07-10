@@ -55,23 +55,15 @@ $tasks = [
   ),
 ];
 
-Route::get('/', function () {
+Route::get('/', function () use ($tasks) {
     return view('index', [
-        'name' => 'Piotr'
+        'tasks' => $tasks
     ]);
-});
+})->name('tasks.index');
 
-Route::get('/xxx', function () {
-    return 'Hello';
-})->name('hello');
-
-Route::get('/hallo', function () {
-    return redirect()->route('hello');
-});
-
-Route::get('/greet/{name}', function ($name) {
-    return 'Hello ' . $name . '!';
-});
+Route::get('/{id}', function ($id) {
+    return 'One single task';
+})->name('tasks.show');
 
 Route::fallback(function () {
     return 'Still got somewhere!';
